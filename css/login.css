@@ -1,0 +1,107 @@
+/*==========================
+    LOGIN GENERAL
+==========================*/
+
+body{
+    background: linear-gradient(135deg,#111,#222,#333);
+}
+
+/*==========================
+    CONTENEDOR
+==========================*/
+
+.loginContainer{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/*==========================
+    CAJA LOGIN
+==========================*/
+
+.loginBox{
+    background:white;
+    width:400px;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    text-align:center;
+}
+
+/*==========================
+    TITULO
+==========================*/
+
+.loginBox h1{
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+.loginBox p{
+    margin-bottom:25px;
+    color:#666;
+}
+
+/*==========================
+    FORMULARIO
+==========================*/
+
+.loginBox form{
+    display:flex;
+    flex-direction:column;
+    text-align:left;
+}
+
+.loginBox label{
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.loginBox input{
+    padding:12px;
+    margin-top:5px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+.loginBox input:focus{
+    border-color:#d4af37;
+}
+
+/*==========================
+    BOTON
+==========================*/
+
+.loginBox button{
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    background:#d4af37;
+    color:#111;
+    font-size:16px;
+    font-weight:bold;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.loginBox button:hover{
+    background:#b89224;
+}
+
+/*==========================
+    EXTRA
+==========================*/
+
+.extra{
+    margin-top:20px;
+    font-size:14px;
+}
+
+.extra a{
+    color:#d4af37;
+    font-weight:bold;
+}

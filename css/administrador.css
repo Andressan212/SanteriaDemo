@@ -1,0 +1,1031 @@
+/*==================================================
+                PANEL ADMINISTRADOR
+==================================================*/
+
+.adminLayout{
+
+    display:flex;
+
+    min-height:100vh;
+
+    background:#eef2f7;
+
+}
+
+/*==================================================
+                SIDEBAR
+==================================================*/
+
+.sidebar{
+
+    width:270px;
+
+    background:#1f2937;
+
+    color:#fff;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    bottom:0;
+
+    overflow-y:auto;
+
+    box-shadow:4px 0 15px rgba(0,0,0,.15);
+
+}
+
+.logoAdmin{
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+
+}
+
+.logoAdmin h2{
+
+    font-size:24px;
+
+    color:#fff;
+
+}
+
+.logoAdmin p{
+
+    color:#cbd5e1;
+
+    margin-top:10px;
+
+    font-size:14px;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    margin-top:20px;
+
+}
+
+.sidebar ul li{
+
+    margin:5px 0;
+
+}
+
+.sidebar ul li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:#fff;
+
+    padding:16px 25px;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:#374151;
+
+    border-left:5px solid #d4af37;
+
+    padding-left:20px;
+
+}
+
+.sidebar ul li a.active{
+
+    background:#374151;
+
+    border-left:5px solid #d4af37;
+
+}
+
+/*==================================================
+                CONTENIDO
+==================================================*/
+
+.content{
+
+    margin-left:270px;
+
+    width:calc(100% - 270px);
+
+    padding:40px;
+
+}
+
+.content h1{
+
+    margin-bottom:30px;
+
+    color:#2c3e50;
+
+}
+
+/*==================================================
+                TARJETAS
+==================================================*/
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card h3{
+
+    color:#666;
+
+    margin-bottom:10px;
+
+}
+
+.card h2{
+
+    color:#111;
+
+    font-size:34px;
+
+}
+
+/*==================================================
+                GRAFICOS
+==================================================*/
+
+.grafico{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+/*==================================================
+                TABLAS
+==================================================*/
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+table thead{
+
+    background:#1f2937;
+
+    color:white;
+
+}
+
+table th{
+
+    padding:18px;
+
+    text-align:left;
+
+}
+
+table td{
+
+    padding:15px;
+
+    border-bottom:1px solid #ececec;
+
+}
+
+table tr:hover{
+
+    background:#f8f8f8;
+
+}
+
+/*==================================================
+                FORMULARIOS
+==================================================*/
+
+form{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+
+}
+
+form input,
+form textarea,
+form select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:10px 0;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+}
+
+form textarea{
+
+    resize:vertical;
+
+    min-height:140px;
+
+}
+
+form button{
+
+    padding:15px 25px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#6b0f1a;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+form button:hover{
+
+    background:#b91372;
+
+}
+
+/*==================================================
+                BOTONES
+==================================================*/
+
+.btnEditar{
+
+    background:#2980b9;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+}
+
+.btnEliminar{
+
+    background:#e74c3c;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+}
+
+.btnVer{
+
+    background:#27ae60;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+}
+
+.btnEditar:hover,
+.btnEliminar:hover,
+.btnVer:hover{
+
+    opacity:.85;
+
+}
+
+/*==================================================
+                IMAGENES
+==================================================*/
+
+table img{
+
+    width:70px;
+
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    border:2px solid #ddd;
+
+}
+/*==================================================
+                FUENTE
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+
+    --font:'Poppins',sans-serif;
+
+}
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:var(--font);
+
+}
+/*menu*/
+/*==========================================
+SIDEBAR
+==========================================*/
+
+.sidebar{
+
+    width:280px;
+
+    min-height:100vh;
+
+    background:#111827;
+
+    color:#fff;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    overflow-y:auto;
+
+    box-shadow:4px 0 20px rgba(0,0,0,.25);
+
+}
+
+.logoAdmin{
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logoAdmin img{
+
+    width:90px;
+
+    margin-bottom:15px;
+
+}
+
+.logoAdmin h2{
+
+    color:#fff;
+
+    margin-bottom:20px;
+
+    font-size:23px;
+
+}
+
+.adminInfo{
+
+    margin-top:10px;
+
+}
+
+.avatar{
+
+    width:85px;
+
+    height:85px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    background:#16a34a;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+}
+
+.adminInfo h3{
+
+    font-size:18px;
+
+    margin-bottom:5px;
+
+}
+
+.adminInfo span{
+
+    color:#9ca3af;
+
+    font-size:14px;
+
+}
+
+.menuAdmin{
+
+    list-style:none;
+
+    padding:20px 0;
+
+}
+
+.menuAdmin li{
+
+    margin:4px 0;
+
+}
+
+.menuAdmin li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 25px;
+
+    text-decoration:none;
+
+    color:#e5e7eb;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.menuAdmin li a:hover{
+
+    background:#16a34a;
+
+    color:white;
+
+    padding-left:35px;
+
+}
+
+.menuAdmin li a i{
+
+    width:24px;
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+.salir{
+
+    margin-top:35px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding-top:20px;
+
+}
+/*==================================
+DASHBOARD
+==================================*/
+
+.content{
+
+    margin-left:280px;
+
+    padding:35px;
+
+    background:#f3f4f6;
+
+    min-height:100vh;
+
+}
+
+.encabezadoDashboard{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.encabezadoDashboard h1{
+
+    font-size:34px;
+
+    color:#1f2937;
+
+}
+
+.encabezadoDashboard p{
+
+    color:#6b7280;
+
+    margin-top:6px;
+
+}
+
+.fecha{
+
+    background:white;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    font-weight:600;
+
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+}
+
+.card{
+
+    border-radius:18px;
+
+    padding:25px;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card i{
+
+    font-size:42px;
+
+}
+
+.card h3{
+
+    font-size:16px;
+
+    margin-bottom:8px;
+
+}
+
+.card h2{
+
+    font-size:30px;
+
+}
+
+.verde{
+
+    background:linear-gradient(135deg,#22c55e,#15803d);
+
+}
+
+.azul{
+
+    background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+
+}
+
+.naranja{
+
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+
+}
+
+.rojo{
+
+    background:linear-gradient(135deg,#ef4444,#b91c1c);
+
+}
+
+.grafico{
+
+    margin-top:35px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.grafico h2{
+
+    margin-bottom:20px;
+
+    color:#1f2937;
+
+}
+/*==================================
+FORMULARIOS ADMIN
+==================================*/
+
+.formAdmin{
+
+    background:#ffffff;
+
+    margin-top:25px;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.formAdmin .grupo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:20px;
+
+}
+
+.formAdmin label{
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+.formAdmin input,
+.formAdmin textarea,
+.formAdmin select{
+
+    padding:14px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.formAdmin input:focus,
+.formAdmin textarea:focus,
+.formAdmin select:focus{
+
+    border-color:#16a34a;
+
+    box-shadow:0 0 8px rgba(22,163,74,.25);
+
+}
+
+.botonesFormulario{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+/*====================================
+MODULO PRODUCTOS
+====================================*/
+
+.barraSuperior{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:25px 0;
+
+    gap:20px;
+
+}
+
+.barraSuperior input{
+
+    width:350px;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #d1d5db;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.barraSuperior input:focus{
+
+    border-color:#16a34a;
+
+    box-shadow:0 0 8px rgba(22,163,74,.25);
+
+    outline:none;
+
+}
+
+.tablaAdmin img{
+
+    width:70px;
+
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+}
+
+.stockAlto{
+
+    background:#16a34a;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+.stockMedio{
+
+    background:#f59e0b;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+.stockBajo{
+
+    background:#dc2626;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+.precio{
+
+    font-weight:bold;
+
+    color:#15803d;
+
+    font-size:17px;
+
+}
+
+.codigoProducto{
+
+    background:#111827;
+
+    color:white;
+
+    padding:5px 10px;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+}
+
+.destacado{
+
+    color:#facc15;
+
+    font-size:18px;
+
+}
+
+.noDestacado{
+
+    color:#9ca3af;
+
+    font-size:18px;
+
+}
+
+.btnEditar{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    margin-right:5px;
+
+    transition:.3s;
+
+}
+
+.btnEditar:hover{
+
+    background:#1d4ed8;
+
+}
+
+.btnEliminar{
+
+    background:#dc2626;
+
+    color:white;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.btnEliminar:hover{
+
+    background:#b91c1c;
+
+}
+
+.tablaAdmin tbody tr{
+
+    transition:.3s;
+
+}
+
+.tablaAdmin tbody tr:hover{
+
+    transform:scale(1.005);
+
+    background:#f9fafb;
+
+}
+
+@media(max-width:900px){
+
+.barraSuperior{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.barraSuperior input{
+
+width:100%;
+
+}
+
+}

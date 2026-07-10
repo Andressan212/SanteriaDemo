@@ -1,0 +1,290 @@
+/*=================================================
+    RESET GENERAL
+=================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+/*=================================================
+    HEADER GENERAL
+=================================================*/
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 8%;
+    background:#111;
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+header .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+header img{
+    width:45px;
+}
+
+header nav ul{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+header nav ul li a{
+    color:white;
+    text-decoration:none;
+}
+
+header nav ul li a:hover{
+    color:#d4af37;
+}
+
+.acciones button{
+    margin-left:10px;
+    padding:10px 15px;
+    border:none;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+/*=================================================
+    BOTONES GENERALES
+=================================================*/
+
+button{
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/*=================================================
+    CATALOGO
+=================================================*/
+
+.gridProductos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+.producto{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    position:relative;
+}
+
+.producto img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.infoProducto{
+    padding:15px;
+}
+
+.precios{
+    display:flex;
+    gap:10px;
+}
+
+.precioAnterior{
+    text-decoration:line-through;
+    color:#888;
+}
+
+.precio{
+    color:#b8860b;
+    font-weight:bold;
+    font-size:20px;
+}
+
+/*=================================================
+    ETIQUETAS
+=================================================*/
+
+.etiqueta{
+    position:absolute;
+    top:10px;
+    left:10px;
+    padding:5px 10px;
+    border-radius:20px;
+    color:white;
+    font-size:12px;
+}
+
+.oferta{background:red;}
+.nuevo{background:green;}
+.vendido{background:blue;}
+
+/*=================================================
+    DETALLE PRODUCTO
+=================================================*/
+
+.productoDetalle{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    padding:50px;
+}
+
+#imagenPrincipal{
+    width:100%;
+    border-radius:10px;
+}
+
+/*=================================================
+    CARRITO
+=================================================*/
+
+table{
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:15px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+.resumen{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+}
+
+/*=================================================
+    LOGIN
+=================================================*/
+
+.loginContainer{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.loginBox{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:350px;
+}
+
+/*=================================================
+    ADMIN PANEL
+=================================================*/
+
+.adminLayout{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:240px;
+    background:#111;
+    color:white;
+    padding:20px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    margin:10px 0;
+}
+
+.sidebar ul li a{
+    color:white;
+    text-decoration:none;
+}
+
+.content{
+    flex:1;
+    padding:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+/*=================================================
+    FORMULARIOS ADMIN
+=================================================*/
+
+.formBox{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+    margin-bottom:20px;
+}
+
+input{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.formBox button{
+    background:#d4af37;
+    border:none;
+    padding:10px;
+    cursor:pointer;
+}
+
+/*=================================================
+    RESPONSIVE
+=================================================*/
+
+@media(max-width:900px){
+
+header{
+    flex-direction:column;
+    gap:10px;
+}
+
+.productoDetalle{
+    grid-template-columns:1fr;
+}
+
+.adminLayout{
+    flex-direction:column;
+}
+
+.sidebar{
+    width:100%;
+}
+
+}
