@@ -125,6 +125,7 @@ ORDER BY id DESC
 
                     <tbody>
 
+
                         <?php while ($producto = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
 
                             <tr>
@@ -161,7 +162,7 @@ ORDER BY id DESC
 
                                     $
 
-                                    <?php echo number_format($producto["precio"], 2, ",", "."); ?>
+                                    <?php echo number_format($producto["precio_venta"], 2, ",", "."); ?>
 
                                 </td>
 

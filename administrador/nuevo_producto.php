@@ -67,26 +67,14 @@ ORDER BY nombre ASC
 
                         </label>
 
-                        <select
+                        <select name="categoria" required>
 
-                            name="categoria"
+                            <option value="">Seleccione una categoría</option>
 
-                            required>
+                            <?php while ($categoria = $categorias->fetch(PDO::FETCH_ASSOC)) { ?>
 
-                            <option value="">
-
-                                Seleccione...
-
-                            </option>
-
-                            <?php while ($cat = $categorias->fetch(PDO::FETCH_ASSOC)) { ?>
-
-                                <option
-
-                                    value="<?php echo $cat["nombre"]; ?>">
-
-                                    <?php echo $cat["nombre"]; ?>
-
+                                <option value="<?php echo $categoria["id"]; ?>">
+                                    <?php echo $categoria["nombre"]; ?>
                                 </option>
 
                             <?php } ?>

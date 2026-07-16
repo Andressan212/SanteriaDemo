@@ -4,9 +4,9 @@ session_start();
 
 require_once("../includes/conexion.php");
 
-/*==================================
+/*====================================
 VALIDAR ENVÍO
-==================================*/
+====================================*/
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
 
@@ -14,9 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     exit();
 }
 
-/*==================================
+/*====================================
 RECIBIR DATOS
-==================================*/
+====================================*/
+
+$id = $_POST["id"];
 
 $categoria = trim($_POST["categoria"]);
 $nombre = trim($_POST["nombre"]);
@@ -32,21 +34,31 @@ $oferta = $_POST["oferta"];
 $destacado = $_POST["destacado"];
 $nuevo = $_POST["nuevo"];
 
-/*==================================
-VALIDACIONES
-==================================*/
+/*====================================
+OBTENER IMAGEN ACTUAL
+====================================*/
 
-if ($nombre == "" || $categoria == "") {
+$sql = $conexion->prepare("
 
-    header("Location: ../administrador/nuevo_producto.php?error=1");
-    exit();
-}
+SELECT imagen
 
-/*==================================
-SUBIR IMAGEN
-==================================*/
+FROM productos
 
-$imagen = "sin-imagen.png";
+WHERE id=?
+
+LIMIT 1
+
+");
+
+$sql->execute([$id]);
+
+$producto = $sql->fetch(PDO::FETCH_ASSOC);
+
+$imagen = $producto["imagen"];
+
+/*====================================
+SUBIR NUEVA IMAGEN
+====================================*/
 
 if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
 
@@ -55,6 +67,23 @@ if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
     $permitidas = ["jpg", "jpeg", "png", "webp"];
 
     if (in_array($extension, $permitidas)) {
+
+        if (
+
+            !empty($imagen)
+
+            &&
+
+            $imagen != "sin-imagen.png"
+
+            &&
+
+            file_exists("../img/productos/" . $imagen)
+
+        ) {
+
+            unlink("../img/productos/" . $imagen);
+        }
 
         $imagen = uniqid() . "." . $extension;
 
@@ -68,47 +97,39 @@ if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
     }
 }
 
-/*==================================
-GUARDAR PRODUCTO
-==================================*/
+/*====================================
+ACTUALIZAR
+====================================*/
 
 $sql = $conexion->prepare("
 
-INSERT INTO productos(
+UPDATE productos
 
-categoria,
+SET
 
-nombre,
+categoria=?,
 
-descripcion,
+nombre=?,
 
-precio_compra,
+descripcion=?,
 
-precio_venta,
+precio_compra=?,
 
-stock,
+precio_venta=?,
 
-imagen,
+stock=?,
 
-precio_anterior,
+imagen=?,
 
-oferta,
+precio_anterior=?,
 
-destacado,
+oferta=?,
 
-nuevo,
+destacado=?,
 
-mas_vendido,
+nuevo=?
 
-visitas
-
-)
-
-VALUES(
-
-?,?,?,?,?,?,?,?,?,?,?,?,?
-
-)
+WHERE id=?
 
 ");
 
@@ -136,13 +157,10 @@ $sql->execute([
 
     $nuevo,
 
-
-    0,
-
-    0
+    $id
 
 ]);
 
-header("Location: ../administrador/productos.php?ok=1");
+header("Location: ../administrador/productos.php?editado=1");
 
 exit();

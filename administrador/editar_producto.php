@@ -3,14 +3,45 @@
 require_once("../includes/verificar.php");
 require_once("../includes/conexion.php");
 
-$id = $_GET["id"];
+if (!isset($_GET["id"])) {
 
-$sql = $conexion->prepare("SELECT * FROM productos WHERE id=?");
+    header("Location: productos.php");
+    exit();
+}
+
+$id = intval($_GET["id"]);
+
+$sql = $conexion->prepare("
+
+SELECT *
+
+FROM productos
+
+WHERE id=?
+
+LIMIT 1
+
+");
+
 $sql->execute([$id]);
+
+if ($sql->rowCount() == 0) {
+
+    header("Location: productos.php");
+    exit();
+}
 
 $producto = $sql->fetch(PDO::FETCH_ASSOC);
 
-$categorias = $conexion->query("SELECT * FROM categorias");
+$categorias = $conexion->query("
+
+SELECT *
+
+FROM categorias
+
+ORDER BY nombre ASC
+
+");
 
 ?>
 
@@ -28,6 +59,10 @@ $categorias = $conexion->query("SELECT * FROM categorias");
 
     <link rel="stylesheet" href="../css/administrador.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -38,145 +73,308 @@ $categorias = $conexion->query("SELECT * FROM categorias");
 
         <div class="content">
 
-            <h1>Editar Producto</h1>
+            <h1>
 
-            <form
+                Editar Producto
 
-                action="../acciones/editar_producto.php"
+            </h1>
 
-                method="POST"
+            <div class="formAdmin">
 
-                enctype="multipart/form-data">
+                <form
 
-                <input
+                    action="../acciones/actualizar_producto.php"
 
-                    type="hidden"
+                    method="POST"
 
-                    name="id"
+                    enctype="multipart/form-data">
 
-                    value="<?= $producto["id"] ?>">
+                    <input
 
-                <input
+                        type="hidden"
 
-                    type="hidden"
+                        name="id"
 
-                    name="imagen_actual"
+                        value="<?php echo $producto["id"]; ?>">
 
-                    value="<?= $producto["imagen"] ?>">
+                    <div class="grupo">
 
-                <label>Nombre</label>
+                        <label>
 
-                <input
+                            Categoría
 
-                    type="text"
+                        </label>
 
-                    name="nombre"
+                        <select
 
-                    value="<?= $producto["nombre"] ?>"
+                            name="categoria"
 
-                    required>
+                            required>
 
-                <label>Descripción</label>
+                            <?php while ($cat = $categorias->fetch(PDO::FETCH_ASSOC)) { ?>
 
-                <textarea
+                                <option
 
-                    name="descripcion"
+                                    value="<?php echo $cat["nombre"]; ?>"
 
-                    required><?= $producto["descripcion"] ?></textarea>
+                                    <?php
 
-                <label>Categoría</label>
+                                    if ($cat["nombre"] == $producto["categoria"]) {
 
-                <select
+                                        echo "selected";
+                                    }
 
-                    name="categoria">
+                                    ?>>
 
-                    <?php
+                                    <?php echo $cat["nombre"]; ?>
 
-                    while ($cat = $categorias->fetch(PDO::FETCH_ASSOC)) {
+                                </option>
 
-                    ?>
+                            <?php } ?>
 
-                        <option
+                        </select>
 
-                            value="<?= $cat["id"] ?>"
+                    </div>
 
-                            <?= $cat["id"] == $producto["categoria"] ? "selected" : ""; ?>>
+                    <div class="grupo">
 
-                            <?= $cat["nombre"] ?>
+                        <label>
 
-                        </option>
+                            Nombre
 
-                    <?php } ?>
+                        </label>
 
-                </select>
+                        <input
 
-                <label>Precio Compra</label>
+                            type="text"
 
-                <input
+                            name="nombre"
 
-                    type="number"
+                            value="<?php echo htmlspecialchars($producto["nombre"]); ?>"
 
-                    step="0.01"
+                            required>
 
-                    name="precio_compra"
+                    </div>
 
-                    value="<?= $producto["precio_compra"] ?>"
+                    <div class="grupo">
 
-                    required>
+                        <label>
 
-                <label>Precio Venta</label>
+                            Descripción
 
-                <input
+                        </label>
 
-                    type="number"
+                        <textarea
 
-                    step="0.01"
+                            name="descripcion"
 
-                    name="precio_venta"
+                            rows="5"><?php echo htmlspecialchars($producto["descripcion"]); ?></textarea>
 
-                    value="<?= $producto["precio_venta"] ?>"
+                    </div>
 
-                    required>
+                    <div class="grupo">
 
-                <label>Stock</label>
+                        <label>
 
-                <input
+                            Precio Compra
 
-                    type="number"
+                        </label>
 
-                    name="stock"
+                        <input
 
-                    value="<?= $producto["stock"] ?>"
+                            type="number"
 
-                    required>
+                            step="0.01"
 
-                <p>Imagen actual</p>
+                            name="precio_compra"
 
-                <img
+                            value="<?php echo $producto["precio_compra"]; ?>"
 
-                    src="../img/productos/<?= $producto["imagen"] ?>"
+                            required>
 
-                    width="150">
+                    </div>
 
-                <br><br>
+                    <div class="grupo">
 
-                <input
+                        <label>
 
-                    type="file"
+                            Precio Venta
 
-                    name="imagen"
+                        </label>
 
-                    accept="image/*">
+                        <input
 
-                <br><br>
+                            type="number"
 
-                <button>
+                            step="0.01"
 
-                    Actualizar Producto
+                            name="precio_venta"
 
-                </button>
+                            value="<?php echo $producto["precio_venta"]; ?>"
 
-            </form>
+                            required>
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Precio Anterior
+
+                        </label>
+
+                        <input
+
+                            type="number"
+
+                            step="0.01"
+
+                            name="precio_anterior"
+
+                            value="<?php echo $producto["precio_anterior"]; ?>">
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Stock
+
+                        </label>
+
+                        <input
+
+                            type="number"
+
+                            name="stock"
+
+                            value="<?php echo $producto["stock"]; ?>"
+
+                            required>
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Imagen Actual
+
+                        </label>
+
+                        <br>
+
+                        <img
+
+                            src="../img/productos/<?php echo $producto["imagen"]; ?>"
+
+                            style="width:120px;border-radius:10px;">
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Cambiar Imagen
+
+                        </label>
+
+                        <input
+
+                            type="file"
+
+                            name="imagen"
+
+                            accept="image/*">
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Oferta
+
+                        </label>
+
+                        <select name="oferta">
+
+                            <option value="0" <?php if ($producto["oferta"] == 0) echo "selected"; ?>>No</option>
+
+                            <option value="1" <?php if ($producto["oferta"] == 1) echo "selected"; ?>>Sí</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Producto Destacado
+
+                        </label>
+
+                        <select name="destacado">
+
+                            <option value="0" <?php if ($producto["destacado"] == 0) echo "selected"; ?>>No</option>
+
+                            <option value="1" <?php if ($producto["destacado"] == 1) echo "selected"; ?>>Sí</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>
+
+                            Producto Nuevo
+
+                        </label>
+
+                        <select name="nuevo">
+
+                            <option value="0" <?php if ($producto["nuevo"] == 0) echo "selected"; ?>>No</option>
+
+                            <option value="1" <?php if ($producto["nuevo"] == 1) echo "selected"; ?>>Sí</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="botonesFormulario">
+
+                        <button
+
+                            class="btnGuardar"
+
+                            type="submit">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            Actualizar Producto
+
+                        </button>
+
+                        <a
+
+                            href="productos.php"
+
+                            class="btnCancelar">
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
 
         </div>
 

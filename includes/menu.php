@@ -32,10 +32,10 @@
 
     <ul class="menuAdmin">
 
-        <li>
+        <li><!--idashboard-->
             <a href="adm-index.php">
                 <i class="fa-solid fa-gauge-high"></i>
-                Dashboard
+                Interface visual
             </a>
         </li>
 
@@ -45,7 +45,15 @@
                 Productos
             </a>
         </li>
+        <li>
 
+            <a href="inventario.php">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                Inventario
+
+            </a>
+
+        </li>
         <li>
             <a href="categorias.php">
                 <i class="fa-solid fa-layer-group"></i>
@@ -108,7 +116,15 @@
                 Configuración
             </a>
         </li>
+        <li>
 
+            <a href="historial_inventario.php">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Historial Inventario
+
+            </a>
+
+        </li>
         <li class="salir">
             <a href="../logout.php">
                 <i class="fa-solid fa-right-from-bracket"></i>

@@ -1,36 +1,82 @@
 <?php
 
+session_start();
+
 require_once("../includes/conexion.php");
 
-$id = $_GET["id"];
+/*=====================================
+VALIDAR ID
+=====================================*/
 
-$sql = $conexion->prepare(
+if (!isset($_GET["id"])) {
 
-    "SELECT imagen
+    header("Location: ../administrador/productos.php");
+    exit();
+}
+
+$id = intval($_GET["id"]);
+
+/*=====================================
+BUSCAR PRODUCTO
+=====================================*/
+
+$sql = $conexion->prepare("
+
+SELECT *
 
 FROM productos
 
-WHERE id=?"
+WHERE id=?
 
-);
+LIMIT 1
+
+");
 
 $sql->execute([$id]);
 
-$p = $sql->fetch(PDO::FETCH_ASSOC);
+if ($sql->rowCount() == 0) {
 
-if (file_exists("../img/productos/" . $p["imagen"])) {
-
-    unlink("../img/productos/" . $p["imagen"]);
+    header("Location: ../administrador/productos.php");
+    exit();
 }
 
-$sql = $conexion->prepare(
+$producto = $sql->fetch(PDO::FETCH_ASSOC);
 
-    "DELETE FROM productos
+/*=====================================
+ELIMINAR IMAGEN
+=====================================*/
 
-WHERE id=?"
+if (
 
-);
+    !empty($producto["imagen"])
+
+    &&
+
+    $producto["imagen"] != "sin-imagen.png"
+
+    &&
+
+    file_exists("../img/productos/" . $producto["imagen"])
+
+) {
+
+    unlink("../img/productos/" . $producto["imagen"]);
+}
+
+/*=====================================
+ELIMINAR PRODUCTO
+=====================================*/
+
+$sql = $conexion->prepare("
+
+DELETE FROM productos
+
+WHERE id=?
+
+");
 
 $sql->execute([$id]);
 
-header("Location: ../administrador/productos.php");
+header("Location: ../administrador/productos.php?eliminado=1");
+
+exit();

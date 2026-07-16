@@ -1,104 +1,291 @@
+<?php
+
+require_once("../includes/verificar.php");
+require_once("../includes/conexion.php");
+
+$mensaje = "";
+
+if (isset($_GET["ok"])) {
+
+    switch ($_GET["ok"]) {
+
+        case "venta":
+            $mensaje = "Venta registrada correctamente.";
+            break;
+
+        case "eliminar":
+            $mensaje = "Venta eliminada correctamente.";
+            break;
+    }
+}
+
+$sql = $conexion->query("
+
+SELECT
+
+ventas.*,
+
+clientes.nombre AS cliente_nombre
+
+FROM ventas
+
+INNER JOIN clientes
+
+ON ventas.cliente = clientes.id
+
+ORDER BY ventas.fecha DESC
+
+");
+
+$totalVentas = $conexion->query("
+
+SELECT COUNT(*)
+
+FROM ventas
+
+")->fetchColumn();
+
+$totalIngresos = $conexion->query("
+
+SELECT IFNULL(SUM(total),0)
+
+FROM ventas
+
+WHERE estado='PAGADA'
+
+")->fetchColumn();
+
+?>
+
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>Admin | Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/estilos.css">
-<link rel="stylesheet" href="../css/responsive.css">
-<link rel="stylesheet" href="../css/admin.css">
+    <title>Ventas</title>
+
+    <link rel="stylesheet" href="../css/administrador.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<div class="adminLayout">
+    <div class="adminLayout">
 
-<aside class="sidebar">
+        <?php include("../includes/menu.php"); ?>
 
-<h2>Panel Admin</h2>
+        <div class="content">
 
-<ul>
+            <div class="encabezadoDashboard">
 
-<li><a href="index.html"> Dashboard</a></li>
-<li><a href="productos.html"> Productos</a></li>
-<li><a href="ventas.html"> Ventas</a></li>
+                <div>
 
-</ul>
+                    <h1>Ventas</h1>
 
-<button onclick="logout()">Cerrar Sesión</button>
+                    <p>Administración de todas las ventas realizadas.</p>
 
-</aside>
+                </div>
 
-<main class="content">
+                <div>
 
-<h1>Registro de Ventas</h1>
+                    <a href="nueva_venta.php" class="btnNuevo">
 
-<!-- FORM VENTA -->
+                        <i class="fa-solid fa-cart-shopping"></i>
 
-<div class="formBox">
+                        Nueva Venta
 
-<input type="text" id="cliente" placeholder="Cliente">
+                    </a>
 
-<input type="text" id="producto" placeholder="Producto">
+                </div>
 
-<input type="number" id="cantidad" placeholder="Cantidad">
+            </div>
 
-<input type="number" id="precio" placeholder="Precio Unitario">
+            <div class="cards">
 
-<button onclick="registrarVenta()">
+                <div class="card">
 
-Registrar Venta
+                    <h3>Total Ventas</h3>
 
-</button>
+                    <h2><?php echo $totalVentas; ?></h2>
 
-</div>
+                </div>
 
-<!-- TABLA -->
+                <div class="card">
 
-<table>
+                    <h3>Ingresos</h3>
 
-<thead>
+                    <h2>$<?php echo number_format($totalIngresos, 2, ",", "."); ?></h2>
 
-<tr>
+                </div>
 
-<th>Cliente</th>
-<th>Producto</th>
-<th>Cantidad</th>
-<th>Total</th>
-<th>Fecha</th>
+            </div>
 
-</tr>
+            <br>
 
-</thead>
+            <div class="barraSuperior">
 
-<tbody id="tablaVentas">
+                <input type="text"
 
-</tbody>
+                    id="buscar"
 
-</table>
+                    placeholder="Buscar venta...">
 
-</main>
+            </div>
 
-</div>
+            <div class="tablaAdmin">
 
-<script src="../js/ventas.js"></script>
+                <table>
 
-<script>
+                    <thead>
 
-function logout(){
+                        <tr>
 
-localStorage.removeItem("usuarioLogueado");
+                            <th>ID</th>
 
-window.location="../login.html";
+                            <th>Cliente</th>
 
-}
+                            <th>Fecha</th>
 
-</script>
+                            <th>Total</th>
+
+                            <th>Estado</th>
+
+                            <th>Método</th>
+
+                            <th>Usuario</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        <!---->
+                        <?php if ($mensaje != "") { ?>
+
+                            <div class="alertaExito">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                                <?php echo $mensaje; ?>
+
+                            </div>
+
+                        <?php } ?>
+                        <!---->
+                        <?php while ($venta = $sql->fetch(PDO::FETCH_ASSOC)) { ?>
+
+                            <tr>
+
+                                <td><?php echo $venta["id"]; ?></td>
+
+                                <td><?php echo $venta["cliente_nombre"]; ?></td>
+
+                                <td><?php echo date("d/m/Y H:i", strtotime($venta["fecha"])); ?></td>
+
+                                <td>$<?php echo number_format($venta["total"], 2, ",", "."); ?></td>
+
+                                <td>
+
+                                    <?php
+
+                                    if ($venta["estado"] == "PAGADA") {
+
+                                        echo "<span class='activo'>PAGADA</span>";
+                                    } elseif ($venta["estado"] == "PENDIENTE") {
+
+                                        echo "<span class='stockMedio'>PENDIENTE</span>";
+                                    } else {
+
+                                        echo "<span class='inactivo'>ANULADA</span>";
+                                    }
+
+                                    ?>
+
+                                </td>
+
+                                <td><?php echo $venta["metodo_pago"]; ?></td>
+
+                                <td><?php echo $venta["usuario"]; ?></td>
+
+                                <td>
+
+                                    <a
+                                        href="detalle_venta.php?id=<?php echo $venta["id"]; ?>"
+                                        class="btnEditar"
+                                        title="Ver">
+
+                                        <i class="fa-solid fa-eye"></i>
+
+                                    </a>
+
+                                    <?php if ($venta["estado"] == "PAGADA") { ?>
+
+                                        <a
+                                            href="../acciones/anular_venta.php?id=<?php echo $venta["id"]; ?>"
+                                            class="btnEliminar"
+                                            title="Anular"
+                                            onclick="return confirm('¿Desea anular esta venta?');">
+
+                                            <i class="fa-solid fa-ban"></i>
+
+                                        </a>
+
+                                    <?php } else { ?>
+
+                                        <a
+                                            href="../acciones/eliminar_venta.php?id=<?php echo $venta["id"]; ?>"
+                                            class="btnEliminar"
+                                            title="Eliminar definitivamente"
+                                            onclick="return confirm('Esta venta será eliminada definitivamente. ¿Continuar?');">
+
+                                            <i class="fa-solid fa-trash"></i>
+
+                                        </a>
+
+                                    <?php } ?>
+
+                                </td>
+
+                            </tr>
+
+                        <?php } ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("buscar").addEventListener("keyup", function() {
+
+            let texto = this.value.toLowerCase();
+
+            let filas = document.querySelectorAll("tbody tr");
+
+            filas.forEach(function(fila) {
+
+                fila.style.display = fila.innerText.toLowerCase().includes(texto) ? "" : "none";
+
+            });
+
+        });
+    </script>
 
 </body>
 

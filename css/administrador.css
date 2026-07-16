@@ -838,7 +838,7 @@ MODULO PRODUCTOS
 
     border-radius:10px;
 
-    border:1px solid #d1d5db;
+    border:1px solid #7e7f80;
 
     font-size:15px;
 
@@ -866,7 +866,7 @@ MODULO PRODUCTOS
 
     border-radius:10px;
 
-    border:1px solid #ddd;
+    border:1px solid #b9b9b9;
 
 }
 
@@ -874,7 +874,7 @@ MODULO PRODUCTOS
 
     background:#16a34a;
 
-    color:white;
+    color:rgb(126, 126, 126);
 
     padding:6px 12px;
 
@@ -888,7 +888,7 @@ MODULO PRODUCTOS
 
     background:#f59e0b;
 
-    color:white;
+    color:rgb(153, 153, 153);
 
     padding:6px 12px;
 
@@ -902,7 +902,7 @@ MODULO PRODUCTOS
 
     background:#dc2626;
 
-    color:white;
+    color:rgb(145, 144, 144);
 
     padding:6px 12px;
 
@@ -926,7 +926,7 @@ MODULO PRODUCTOS
 
     background:#111827;
 
-    color:white;
+    color:rgb(153, 153, 153);
 
     padding:5px 10px;
 
@@ -1008,7 +1008,7 @@ MODULO PRODUCTOS
 
     transform:scale(1.005);
 
-    background:#f9fafb;
+    background:#fffefe;
 
 }
 
@@ -1027,5 +1027,464 @@ align-items:flex-start;
 width:100%;
 
 }
+
+}
+/*==================================
+ENTRADAS INVENTARIO
+==================================*/
+
+.formAdmin select{
+
+    width:100%;
+
+}
+
+.formAdmin textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+.btnGuardar{
+
+    background:#16a34a;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btnGuardar:hover{
+
+    background:#15803d;
+
+}
+
+.btnCancelar{
+
+    background:#6b7280;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.btnCancelar:hover{
+
+    background:#4b5563;
+
+}
+/*==============================
+SALIDA INVENTARIO
+==============================*/
+.btnModificar{
+
+    background:#dc2626;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btnModificar:hover{
+
+    background:#b91c1c;
+
+}
+/*==============================
+ALERTA INVENTARIO
+==============================*/
+
+.alertaInventario{
+
+background:#fff7ed;
+
+border-left:6px solid #ea580c;
+
+padding:20px;
+
+margin:25px 0;
+
+border-radius:10px;
+
+}
+
+.alertaInventario h3{
+
+margin-bottom:10px;
+
+color:#c2410c;
+
+}
+
+.alertaInventario ul{
+
+margin-left:20px;
+
+}
+
+.alertaInventario li{
+
+padding:5px 0;
+
+}
+/**mensaje ventas**/
+.alertaExito{
+
+    background:#d1fae5;
+
+    color:#065f46;
+
+    border:1px solid #10b981;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.alertaExito i{
+
+    margin-right:8px;
+
+}
+/**detalle ventas**/
+.ticket{
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:30px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.10);
+
+    margin-bottom:20px;
+
+}
+
+.empresa{
+
+    text-align:center;
+
+}
+
+.empresa h1{
+
+    color:#7b2d26;
+
+    margin-bottom:10px;
+
+}
+
+.datosVenta{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin:20px 0;
+
+}
+/*detalleventa*/
+.ticket{
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+}
+
+.empresa{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+.logoTicket{
+
+    width:100px;
+
+    margin-bottom:15px;
+
+}
+
+.datosVenta{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin:25px 0;
+
+}
+
+.totalTicket{
+
+    margin-top:30px;
+
+    background:#f8f8f8;
+
+    border-radius:10px;
+
+    padding:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+.accionesTicket{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+}
+/**/
+.ticket{
+
+    background:#fff;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+
+}
+
+.logoTicket{
+
+    width:90px;
+
+    margin-bottom:15px;
+
+}
+
+.empresa{
+
+    text-align:center;
+
+}
+
+.empresa h1{
+
+    color:#8B4513;
+
+    margin:10px 0;
+
+}
+
+.datosVenta{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin:25px 0;
+
+}
+
+.tablaAdmin{
+
+    margin-top:25px;
+
+}
+
+.totalTicket{
+
+    margin-top:30px;
+
+    background:#f7f7f7;
+
+    border-left:6px solid #8B4513;
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.gracias{
+
+    text-align:center;
+
+    margin:35px 0;
+
+    color:#666;
+
+}
+
+.accionesTicket{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+/*====================================
+IMPRESIÓN DEL TICKET
+====================================*/
+
+@media print{
+
+    body{
+
+        background:#ffffff;
+
+    }
+
+    .menu,
+
+    .sidebar,
+
+    nav,
+
+    header,
+
+    footer,
+
+    .accionesTicket,
+
+    .btnGuardar,
+
+    .btnCancelar{
+
+        display:none !important;
+
+    }
+
+    .adminLayout{
+
+        display:block;
+
+    }
+
+    .content{
+
+        margin:0;
+
+        padding:0;
+
+        width:100%;
+
+    }
+
+    .ticket{
+
+        width:100%;
+
+        max-width:100%;
+
+        margin:0;
+
+        padding:20px;
+
+        box-shadow:none;
+
+        border:none;
+
+    }
+
+    .tablaAdmin{
+
+        width:100%;
+
+        border-collapse:collapse;
+
+    }
+
+    .tablaAdmin th,
+
+    .tablaAdmin td{
+
+        border:1px solid #000;
+
+        padding:8px;
+
+    }
+
+    .totalTicket{
+
+        border-top:2px solid #000;
+
+        margin-top:20px;
+
+    }
 
 }

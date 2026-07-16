@@ -66,7 +66,7 @@ FROM ventas
 
                 <div>
 
-                    <h1>Dashboard</h1>
+                    <h1>Interface visual</h1>
 
                     <p>
 
