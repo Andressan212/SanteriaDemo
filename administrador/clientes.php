@@ -27,7 +27,66 @@ if ($buscar != "") {
     ORDER BY nombre ASC
     ");
 }
+$mensaje = "";
 
+if (isset($_GET["ok"])) {
+
+    switch ($_GET["ok"]) {
+
+        case "1":
+            $mensaje = "Cliente registrado correctamente.";
+            break;
+
+        case "actualizado":
+            $mensaje = "Cliente actualizado correctamente.";
+            break;
+
+        case "eliminado":
+            $mensaje = "Cliente eliminado correctamente.";
+            break;
+    }
+}
+
+if (isset($_GET["error"])) {
+
+    switch ($_GET["error"]) {
+
+        case "tieneventas":
+            $mensaje = "No se puede eliminar el cliente porque tiene ventas registradas.";
+            break;
+    }
+}
+
+/*antes de clientes*/
+$mensaje = "";
+
+if (isset($_GET["ok"])) {
+
+    switch ($_GET["ok"]) {
+
+        case "1":
+            $mensaje = "Cliente registrado correctamente.";
+            break;
+
+        case "actualizado":
+            $mensaje = "Cliente actualizado correctamente.";
+            break;
+
+        case "eliminado":
+            $mensaje = "Cliente eliminado correctamente.";
+            break;
+    }
+}
+
+if (isset($_GET["error"])) {
+
+    switch ($_GET["error"]) {
+
+        case "tieneventas":
+            $mensaje = "No se puede eliminar el cliente porque tiene ventas registradas.";
+            break;
+    }
+}
 /*=============================
 TOTAL CLIENTES
 =============================*/
@@ -63,7 +122,19 @@ FROM clientes
         <?php include("../includes/menu.php"); ?>
 
         <div class="content">
+            <!---->
+            <?php if ($mensaje != "") { ?>
 
+                <div class="mensajeExito">
+
+                    <?php echo $mensaje; ?>
+
+                </div>
+
+                <br>
+
+            <?php } ?>
+            <!---->
             <h1>Clientes</h1>
 
             <a href="nuevo_cliente.php" class="btnGuardar">

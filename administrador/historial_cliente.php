@@ -11,9 +11,9 @@ if (!isset($_GET["id"])) {
 
 $id = intval($_GET["id"]);
 
-/*=================================
-CLIENTE
-=================================*/
+/*==================================
+OBTENER CLIENTE
+==================================*/
 
 $sqlCliente = $conexion->prepare("
 
@@ -37,9 +37,9 @@ if ($sqlCliente->rowCount() == 0) {
 
 $cliente = $sqlCliente->fetch(PDO::FETCH_ASSOC);
 
-/*=================================
-VENTAS DEL CLIENTE
-=================================*/
+/*==================================
+OBTENER VENTAS DEL CLIENTE
+==================================*/
 
 $sqlVentas = $conexion->prepare("
 
@@ -55,9 +55,9 @@ ORDER BY fecha DESC
 
 $sqlVentas->execute([$id]);
 
-/*=================================
+/*==================================
 TOTAL GASTADO
-=================================*/
+==================================*/
 
 $sqlTotal = $conexion->prepare("
 
@@ -75,9 +75,9 @@ $sqlTotal->execute([$id]);
 
 $totalGastado = $sqlTotal->fetchColumn();
 
-/*=================================
+/*==================================
 CANTIDAD DE COMPRAS
-=================================*/
+==================================*/
 
 $sqlCantidad = $conexion->prepare("
 
@@ -92,9 +92,7 @@ WHERE cliente=?
 $sqlCantidad->execute([$id]);
 
 $cantidadCompras = $sqlCantidad->fetchColumn();
-
 ?>
-
 <!DOCTYPE html>
 
 <html lang="es">
@@ -107,7 +105,8 @@ $cantidadCompras = $sqlCantidad->fetchColumn();
 
     <link rel="stylesheet" href="../css/administrador.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -125,11 +124,11 @@ $cantidadCompras = $sqlCantidad->fetchColumn();
 
                 <h2><?php echo $cliente["nombre"]; ?></h2>
 
-                <p><strong>Teléfono:</strong> <?php echo $cliente["telefono"]; ?></p>
+                <p><b>Teléfono:</b> <?php echo $cliente["telefono"]; ?></p>
 
-                <p><strong>Correo:</strong> <?php echo $cliente["correo"]; ?></p>
+                <p><b>Correo:</b> <?php echo $cliente["correo"]; ?></p>
 
-                <p><strong>Dirección:</strong> <?php echo $cliente["direccion"]; ?></p>
+                <p><b>Dirección:</b> <?php echo $cliente["direccion"]; ?></p>
 
             </div>
 
@@ -141,7 +140,7 @@ $cantidadCompras = $sqlCantidad->fetchColumn();
 
                     <tr>
 
-                        <th>ID Venta</th>
+                        <th>Venta</th>
 
                         <th>Fecha</th>
 
@@ -149,7 +148,7 @@ $cantidadCompras = $sqlCantidad->fetchColumn();
 
                         <th>Total</th>
 
-                        <th>Detalle</th>
+                        <th>Ver</th>
 
                     </tr>
 
@@ -193,7 +192,7 @@ $cantidadCompras = $sqlCantidad->fetchColumn();
 
             <div class="card">
 
-                <h3>Total de Compras</h3>
+                <h3>Total Compras</h3>
 
                 <h2><?php echo $cantidadCompras; ?></h2>
 
